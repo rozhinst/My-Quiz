@@ -23,6 +23,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList randNumbers;
     private int counter;
     private int arrayCnt;
+    private Question quest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,30 +45,44 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             randNumbers.add(i);
         Collections.shuffle(randNumbers);
 
-        Question quest = (Question)questions.get((int)randNumbers.get(arrayCnt));
+        quest = (Question)questions.get((int)randNumbers.get(arrayCnt));
         System.out.println(quest.getQuestion()+ " rand is" + randNumbers.get(arrayCnt));
         view.setText(quest.getQuestion());
         counter = 1;
-        arrayCnt++;
+       // arrayCnt++;
 
 
 
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view) {////problemasssssss
         switch (view.getId()){
             case R.id.true_button:
-                if(counter < questions.size())
-                    checkAnswer((Question)questions.get((int)randNumbers.get(arrayCnt)), true);
-                else
-                    startActivity(new Intent(GameActivity.this,PlayAgain.class));
+                if(counter < questions.size()) {
+                    checkAnswer(quest, true);
+                    quest = (Question)questions.get((int)randNumbers.get(arrayCnt));
+                    this.view.setText(quest.getQuestion());
+                }
+
+                else {
+                    startActivity(new Intent(GameActivity.this, PlayAgain.class));
+                    finish();
+                }
                 break;
+
             case R.id.false_button:
-                if(counter < questions.size())
-                    checkAnswer((Question)questions.get((int)randNumbers.get(arrayCnt)), false);
-                else
-                    startActivity(new Intent(GameActivity.this,PlayAgain.class));
+                this.view.setText("hiiiiii");
+                if(counter < questions.size()) {
+                    checkAnswer(quest, false);
+                    quest = (Question)questions.get((int)randNumbers.get(arrayCnt));
+                    this.view.setText(quest.getQuestion());
+                }
+                else {
+                    startActivity(new Intent(GameActivity.this, PlayAgain.class));
+                    finish();
+                }
+
                 break;
 
 
@@ -75,14 +90,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void checkAnswer(Question question, boolean ans){
+    private void checkAnswer(Question question, boolean ans){
         if(question.getAnswer() == ans)
             Toast.makeText(GameActivity.this, "True", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(GameActivity.this, "False", Toast.LENGTH_SHORT).show();
-        Question quest = (Question)questions.get((int)randNumbers.get(arrayCnt));
-        view.setText(quest.getQuestion());
-        System.out.println(quest.getQuestion()+ " rand is" + randNumbers.get(arrayCnt));
         counter++;
         arrayCnt++;
 

@@ -1,5 +1,6 @@
 package com.example.randomquiz;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText enterName;
     private ArrayList<Question> questions;
     private Question question;
+    private final int RESAULT_CODE = 2;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +90,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.play_button:
                 Intent intent = new Intent(MainActivity.this,GameActivity.class);
                 intent.putExtra("array",  questions);
-                startActivity(intent);
+                //startActivity(intent);
+                startActivityForResult(intent, RESAULT_CODE);
                 break;
-
-
 
 
 
@@ -99,4 +100,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESAULT_CODE){
+            Toast.makeText(MainActivity.this, "Start Again!", Toast.LENGTH_SHORT).show();
+            questions = new ArrayList<>();
+            showText.setText("0");
+        }
+
+    }
 }
