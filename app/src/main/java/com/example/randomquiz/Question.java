@@ -1,7 +1,8 @@
 package com.example.randomquiz;
-import android.text.Editable;
 
-public class Question {
+import java.io.Serializable;
+
+public class Question implements Serializable {
     private String question;
     private boolean answer;
 
@@ -13,7 +14,7 @@ public class Question {
         this.question = question;
     }
 
-    public boolean isAnswer() {
+    public boolean getAnswer() {
         return answer;
     }
 
@@ -23,7 +24,6 @@ public class Question {
 
     public Question(String question) {
         this.question = question;
-        this.answer = answer;
     }
 
 }

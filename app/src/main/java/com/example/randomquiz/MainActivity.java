@@ -4,17 +4,21 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SearchRecentSuggestionsProvider;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener , Serializable {
     private Button myButton;
     private Button falseButton;
     private Button trueButton;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.editText:
                 //enterName.setText("");
+                System.out.println(enterName.getText().toString());
                 question = new Question(enterName.getText().toString());
                 break;
             case R.id.false_button:
@@ -69,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (enterName.getText().toString().equals("")){
                     Toast.makeText(MainActivity.this , "Question cannot be empty!!" , Toast.LENGTH_SHORT).show();
                 }else {
+                    question.setQuestion(enterName.getText().toString());
                     enterName.setText("");
                     questions.add(question);
                     Toast.makeText(MainActivity.this, "Question Successfully added!", Toast.LENGTH_SHORT).show();
@@ -80,8 +86,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.play_button:
-                startActivity(new Intent(MainActivity.this,GameActivity.class));
-
+                Intent intent = new Intent(MainActivity.this,GameActivity.class);
+                intent.putExtra("array",  questions);
+                startActivity(intent);
                 break;
 
 
@@ -91,4 +98,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+
 }
