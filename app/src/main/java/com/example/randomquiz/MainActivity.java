@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     showText.setText(questions.size() + "");
                     falseButton.setEnabled(true);
                     trueButton.setEnabled(true);
+                    question = new Question(null);
                 }
 //                enterName.setText(null);
 
