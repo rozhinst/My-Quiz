@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         falseButton = findViewById(R.id.false_button);
         trueButton = findViewById(R.id.true_button);
         Button playButton = findViewById(R.id.play_button);
-        enterName = findViewById(R.id.editText);
-        showText = findViewById(R.id.textView);
+        enterName = findViewById(R.id.question_edittext);
+        showText = findViewById(R.id.count_textview);
         questions = new ArrayList<>();
 
         enterName.setOnClickListener(this);
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.editText:
+            case R.id.question_edittext:
                 question = new Question(enterName.getText().toString());
                 break;
             case R.id.false_button:

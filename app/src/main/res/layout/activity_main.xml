@@ -6,102 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/false_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/false_button"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.785"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.495" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.213" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="391dp"
+        android:id="@+id/question_edittext"
+        android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="@dimen/small_dimen"
+        android:layout_marginEnd="@dimen/small_dimen"
         android:layout_marginTop="72dp"
+        android:background="@android:drawable/editbox_background"
         android:ems="10"
         android:hint="@string/enter_question"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="Autofill" />
+
+    <Button
+        android:id="@+id/false_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_dimen"
+        android:text="@string/false_button"
+        app:layout_constraintEnd_toEndOf="@id/question_edittext"
+        app:layout_constraintStart_toEndOf="@id/true_button"
+        app:layout_constraintTop_toBottomOf="@+id/question_edittext" />
+
+    <Button
+        android:id="@+id/true_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_dimen"
+        android:text="@string/true_button_text"
+        app:layout_constraintEnd_toStartOf="@id/false_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_edittext" />
+
+    <TextView
+        android:id="@+id/count_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_dimen"
+        android:textSize="@dimen/medium_text"
+        app:layout_constraintBottom_toTopOf="@id/play_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        android:textAlignment="center"
+        tools:text="count"/>
+
 
     <Button
         android:id="@+id/button"
         style="@android:style/Widget.DeviceDefault.Button.Colored"
         android:layout_width="0dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_dimen"
+        android:padding="@dimen/small_dimen"
         android:text="@string/add_question"
         android:textStyle="normal|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/count_textview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.33"
+        app:layout_constraintTop_toBottomOf="@+id/true_button"
         tools:targetApi="p" />
 
-    <Button
-        android:id="@+id/true_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/true_button_text"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <Button
         android:id="@+id/play_button"
-        android:layout_width="235dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_dimen"
         android:background="@color/colorPrimaryDark"
-        android:isScrollContainer="true"
-        android:shadowColor="#673AB7"
+        android:shadowColor="@color/button_shadow_color"
+        android:paddingStart="@dimen/huge_dimen"
+        android:paddingEnd="@dimen/huge_dimen"
         android:text="@string/let_s_play"
-        android:textColor="#E91E63"
+        android:textColor="@color/button_text_color"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/count_textview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
