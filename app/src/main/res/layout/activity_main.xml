@@ -43,12 +43,12 @@
         android:layout_height="72dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="72dp"
-        android:autofillHints=""
         android:ems="10"
         android:hint="@string/enter_question"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/button"
@@ -78,7 +78,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/true_button"
+        android:text="@string/true_button_text"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.179"

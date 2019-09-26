@@ -86,9 +86,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private void checkAnswer(Question question, boolean ans) {
         if (question.getAnswer() == ans)
-            Toast.makeText(GameActivity.this, "True", Toast.LENGTH_SHORT).show();
+            Toast.makeText(GameActivity.this, getString(R.string.true_button_text), Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(GameActivity.this, "False", Toast.LENGTH_SHORT).show();
+            Toast.makeText(GameActivity.this, getString(R.string.false_button_text), Toast.LENGTH_SHORT).show();
         Log.d("Debug", "checkAnswer: " + question.getQuestion() + "  " + randNumbers.get(arrayCnt));
         counter++;
         arrayCnt++;
