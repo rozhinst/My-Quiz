@@ -3,7 +3,12 @@
     <string name="enter_question">Enter Question</string>
     <string name="add_question">Add Question</string>
     <string name="false_button">False</string>
-    <string name="true_button">True</string>
+    <string name="true_button_text">True</string>
     <string name="let_s_play">Let\'s Play!</string>
     <string name="play_again">Play Again!</string>
+    <string name="empty_question_error_text">Question body con not be empty!</string>
+    <string name="false_button_text">False</string>
+    <string name="question_added_message">Question Successfully added!</string>
+    <string name="start_again">Start Again!</string>
+    <string name="friends_turn">Friend\'s Turn!</string>
 </resources>

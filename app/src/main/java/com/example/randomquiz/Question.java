@@ -2,27 +2,27 @@ package com.example.randomquiz;
 
 import java.io.Serializable;
 
-public class Question implements Serializable {
+class Question implements Serializable {
     private String question;
     private boolean answer;
 
-    public String getQuestion() {
+    String getQuestion() {
         return question;
     }
 
-    public void setQuestion(String question) {
+    void setQuestion(String question) {
         this.question = question;
     }
 
-    public boolean getAnswer() {
+    boolean getAnswer() {
         return answer;
     }
 
-    public void setAnswer(boolean answer) {
+    void setAnswer(boolean answer) {
         this.answer = answer;
     }
 
-    public Question(String question) {
+    Question(String question) {
         this.question = question;
     }
 

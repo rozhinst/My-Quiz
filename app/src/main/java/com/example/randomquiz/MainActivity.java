@@ -1,46 +1,40 @@
 package com.example.randomquiz;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SearchRecentSuggestionsProvider;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener , Serializable {
-    private Button myButton;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final String QUESTIONS_ARRAY_EXTRA = "QUESTIONS_ARRAY_EXTRA";
     private Button falseButton;
     private Button trueButton;
-    private Button playButton;
     private TextView showText;
     private EditText enterName;
     private ArrayList<Question> questions;
     private Question question;
-    private final int RESAULT_CODE = 2;
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    private final int RESULT_CODE = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myButton = findViewById(R.id.button);
+        Button myButton = findViewById(R.id.button);
         falseButton = findViewById(R.id.false_button);
         trueButton = findViewById(R.id.true_button);
-        playButton = findViewById(R.id.play_button);
-        enterName  = findViewById(R.id.editText);
-        showText = findViewById(R.id.textView);
+        Button playButton = findViewById(R.id.play_button);
+        enterName = findViewById(R.id.question_edittext);
+        showText = findViewById(R.id.count_textview);
         questions = new ArrayList<>();
 
         enterName.setOnClickListener(this);
@@ -48,54 +42,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         trueButton.setOnClickListener(this);
         myButton.setOnClickListener(this);
         playButton.setOnClickListener(this);
-
-//        showText.setText(questions.size());
-
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.editText:
-                //enterName.setText("");
-                System.out.println(enterName.getText().toString());
+        switch (view.getId()) {
+            case R.id.question_edittext:
                 question = new Question(enterName.getText().toString());
                 break;
             case R.id.false_button:
                 question.setAnswer(false);
                 trueButton.setEnabled(false);
-                Toast.makeText(MainActivity.this,"False",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.false_button_text), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.true_button:
                 question.setAnswer(true);
                 falseButton.setEnabled(false);
-                Toast.makeText(MainActivity.this,"True",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.true_button_text), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button:
-//                System.out.println(enterName.getText().length());
-                if (enterName.getText().toString().equals("")){
-                    Toast.makeText(MainActivity.this , "Question cannot be empty!!" , Toast.LENGTH_SHORT).show();
-                }else {
+                if (TextUtils.isEmpty(enterName.getText().toString())) {
+                    Toast.makeText(this, getString(R.string.empty_question_error_text), Toast.LENGTH_SHORT).show();
+                } else {
                     question.setQuestion(enterName.getText().toString());
                     enterName.setText("");
                     questions.add(question);
-                    Toast.makeText(MainActivity.this, "Question Successfully added!", Toast.LENGTH_SHORT).show();
-                    showText.setText(questions.size() + "");
+                    Toast.makeText(this, getString(R.string.question_added_message), Toast.LENGTH_SHORT).show();
+                    showText.setText(String.valueOf(questions.size()));
                     falseButton.setEnabled(true);
                     trueButton.setEnabled(true);
                     question = new Question(null);
                 }
-//                enterName.setText(null);
 
                 break;
             case R.id.play_button:
-                Intent intent = new Intent(MainActivity.this,GameActivity.class);
-                intent.putExtra("array",  questions);
-                //startActivity(intent);
-                startActivityForResult(intent, RESAULT_CODE);
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                intent.putExtra(QUESTIONS_ARRAY_EXTRA, questions);
+                startActivityForResult(intent, RESULT_CODE);
                 break;
-
-
 
 
         }
@@ -104,8 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESAULT_CODE){
-            Toast.makeText(MainActivity.this, "Start Again!", Toast.LENGTH_SHORT).show();
+        if (requestCode == RESULT_CODE) {
+            Toast.makeText(MainActivity.this, getString(R.string.start_again), Toast.LENGTH_SHORT).show();
             questions = new ArrayList<>();
             showText.setText("0");
         }
